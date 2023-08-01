@@ -1,0 +1,21 @@
+services:
+  mysqldb:
+    image: mysql:8.0.34
+    container_name: tournamentdatabase
+    volumes:
+      - ./server/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      DB_PORT: 3306
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tournament
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    networks:
+      - dockerbridge
+networks:
+  dockerbridge:
+    driver: bridge
