@@ -18,7 +18,10 @@ services:
       - dockerbridge
   api:
     image: tournamentapi:1.0
-    build: server/.
+    build: 
+      context: server/.
+      args:
+        API_PORT: 8080
     container_name: tournamentapi
     ports:
       - "8080:8080"
@@ -30,6 +33,7 @@ services:
       DB_PASSWORD: "password"
       DB_NAME: "tournament"
       DB_PORT: "3306"
+      API_PORT: "8080"
     depends_on:
       - mysqldb
     networks:

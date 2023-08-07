@@ -2,6 +2,9 @@ const express = require('express');
 
 import { Request, Response, NextFunction } from 'express';
 
+import { config } from 'dotenv';
+config();
+
 const app = express();
 
 app.use(express.json());
@@ -19,4 +22,4 @@ const teamRoutes = require('./routes/team');
 
 app.use(teamRoutes);
 
-app.listen(8080);
+app.listen(process.env.API_PORT);
