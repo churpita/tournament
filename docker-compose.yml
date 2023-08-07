@@ -16,6 +16,24 @@ services:
       MYSQL_PASSWORD: password
     networks:
       - dockerbridge
+  api:
+    image: tournamentapi:1.0
+    build: server/.
+    container_name: tournamentapi
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    environment:
+      DB_HOST: mysqldb
+      DB_USER: "admin"
+      DB_PASSWORD: "password"
+      DB_NAME: "tournament"
+      DB_PORT: "3306"
+    depends_on:
+      - mysqldb
+    networks:
+      - dockerbridge
 networks:
   dockerbridge:
     driver: bridge
