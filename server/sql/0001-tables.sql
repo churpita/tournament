@@ -16,17 +16,17 @@ CREATE TABLE match (
 CREATE TABLE team (
     team_key                int             NOT NULL AUTO_INCREMENT,
     name                    varchar(64)     NOT NULL,
+    captain_name            varchar(128)    NOT NULL,
     
     PRIMARY KEY (team_key)
 );
 
-CREATE TABLE player (
-    player_key              int             NOT NULL AUTO_INCREMENT,
-    username                varchar(128)    NOT NULL,
-    discord_name            varchar(32)     NULL,
-    
-    PRIMARY KEY (player_key)
-)
+CREATE TABLE game (
+    game_key                int             NOT NULL AUTO_INCREMENT,
+    name                    varchar(128)    NOT NULL,
+
+    PRIMARY KEY (game_key)
+);
 
 -- Foreign key tables
 
@@ -55,15 +55,3 @@ CREATE TABLE match_participant (
     FOREIGN KEY (match_key) REFERENCES match(match_key),
     FOREIGN KEY (team_key) REFERENCES team(team_key)
 );
-
--- Consider this table the members of any given team
-CREATE TABLE team_member (
-    team_member_key         int             NOT NULL AUTO_INCREMENT,
-    team_key                int             NOT NULL,
-    player_key              int             NOT NULL,
-    is_captain              tinyint         NULL,
-    
-    PRIMARY KEY (team_member_key),
-    FOREIGN KEY (team_key) REFERENCES team(team_key),
-    FOREIGN KEY (player_key) REFERENCES player(player_key)
-)
