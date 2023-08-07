@@ -18,6 +18,15 @@ export const addTeam = async (req: Request, res: Response) => {
                 ?
             )
         `, [name, captain_name]);
+
+        res.status(200).json({
+            success: true,
+            message: `Successfully added ${name}`,
+            data: {
+                name: name,
+                captain_name: captain_name
+            }
+        })
     } 
     catch (err) {
         console.log(err);

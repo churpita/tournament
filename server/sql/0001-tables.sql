@@ -6,13 +6,6 @@ CREATE TABLE tournament (
     PRIMARY KEY (tournament_key)
 );
 
-CREATE TABLE match (
-    match_key               int             NOT NULL AUTO_INCREMENT,
-    winner_team_key         int             NULL,
-    
-    PRIMARY KEY (match_key)
-);
-
 CREATE TABLE team (
     team_key                int             NOT NULL AUTO_INCREMENT,
     name                    varchar(64)     NOT NULL,
@@ -28,30 +21,38 @@ CREATE TABLE game (
     PRIMARY KEY (game_key)
 );
 
+CREATE TABLE matchup (
+    matchup_key             int             NOT NULL AUTO_INCREMENT,
+    winner_team_key         int             NULL,
+    
+    PRIMARY KEY (matchup_key),
+    FOREIGN KEY (winner_team_key) REFERENCES team(team_key)
+);
+
 -- Foreign key tables
 
 -- Consider this table the actual bracket nodes
 CREATE TABLE tournament_match (
     tournament_match_key    int             NOT NULL AUTO_INCREMENT,
     tournament_key          int             NOT NULL,
-    match_key               int             NOT NULL,
-    previous_match_key      int             NULL,
+    matchup_key             int             NOT NULL,
+    previous_matchup_key      int           NULL,
     round                   int             NULL,
     seed                    int             NULL,
     
     PRIMARY KEY (tournament_match_key),
     FOREIGN KEY (tournament_key) REFERENCES tournament(tournament_key),
-    FOREIGN KEY (match_key) REFERENCES match(match_key),
-    FOREIGN KEY (previous_match_key) REFERENCES match(match_key)
+    FOREIGN KEY (matchup_key) REFERENCES matchup(matchup_key),
+    FOREIGN KEY (previous_matchup_key) REFERENCES matchup(matchup_key)
 );
 
 -- Consider this table the participants of any given match
-CREATE TABLE match_participant (
-    match_participant_key   int             NOT NULL AUTO_INCREMENT,
-    match_key               int             NOT NULL,
+CREATE TABLE matchup_participant (
+    matchup_participant_key int             NOT NULL AUTO_INCREMENT,
+    matchup_key             int             NOT NULL,
     team_key                int             NOT NULL,
     
-    PRIMARY KEY (match_participant_key),
-    FOREIGN KEY (match_key) REFERENCES match(match_key),
+    PRIMARY KEY (matchup_participant_key),
+    FOREIGN KEY (matchup_key) REFERENCES matchup(matchup_key),
     FOREIGN KEY (team_key) REFERENCES team(team_key)
 );
