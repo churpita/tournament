@@ -3,9 +3,13 @@ import { Request, Response } from 'express';
 import { db } from '../util/database';
 
 export const addTeam = async (req: Request, res: Response) => {
-    const { name, captain_name } = req.body;
-
     try {
+        const { name, captain_name } = req.body;
+
+        if (name == null || captain_name == null) {
+            throw new ReferenceError('A required request parameter is missing.');
+        }
+
         await db.execute(`
             INSERT INTO team
             (
