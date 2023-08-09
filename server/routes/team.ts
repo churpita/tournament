@@ -2,8 +2,9 @@ import express from "express";
 
 const router = express.Router();
 
-import { addTeam } from "../controllers/team";
+import { getTeam, addTeam } from "../controllers/team";
 
+router.get("/team", getTeam);
 router.post("/team", addTeam);
 
 module.exports = router;
