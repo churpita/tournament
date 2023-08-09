@@ -106,3 +106,29 @@ export const updateTeam = async (req: Request, res: Response) => {
         });
     }
 }
+
+export const deleteTeam = async (req: Request, res: Response) => {
+    try {
+        const { team_key } = req.body;
+
+        if (team_key == null) {
+            throw new ReferenceError('A required request parameter is missing.');
+        }
+
+        await db.execute(`DELETE FROM team WHERE team_key = ?`, [team_key]);
+
+        res.status(200).json({
+            success: true,
+            message: `Successfully deleted team ${team_key}`,
+            data: null
+        })
+    } 
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Sorry, an error occurred.",
+            data: null,
+        });
+    }
+}
