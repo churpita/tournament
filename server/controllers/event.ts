@@ -2,18 +2,18 @@ import { Request, Response } from 'express';
 
 import { db } from '../util/database';
 
-export const getTeam = async (req: Request, res: Response) => {
+export const getEvent = async (req: Request, res: Response) => {
     try {
-        const { team_key } = req.body;
+        const { event_key } = req.body;
 
         let results;
 
-        if (team_key != null) {
-            results = await db.execute(`SELECT * FROM team WHERE team_key = ?`, [team_key]);
+        if (event_key != null) {
+            results = await db.execute(`SELECT * FROM event WHERE event_key = ?`, [event_key]);
             results = results[0];
         }
         else {
-            results = await db.execute(`SELECT * FROM team`);
+            results = await db.execute(`SELECT * FROM event`);
             results = results[0];
         }
 
@@ -35,36 +35,30 @@ export const getTeam = async (req: Request, res: Response) => {
     }
 }
 
-export const addTeam = async (req: Request, res: Response) => {
+export const addEvent = async (req: Request, res: Response) => {
     try {
-        const { event_key, name, captain_name } = req.body;
+        const { name } = req.body;
 
-        if (event_key == null || name == null || captain_name == null) {
+        if (name == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
         await db.execute(`
-            INSERT INTO team
-            (
-                event_key,
-                name,
-                captain_name
+            INSERT INTO event
+            (    
+                name   
             )
             VALUES
             (
-                ?,
-                ?,
                 ?
             )
-        `, [event_key, name, captain_name]);
+        `, [name]);
 
         res.status(200).json({
             success: true,
-            message: `Successfully added ${name}`,
+            message: `Successfully added event ${name}`,
             data: {
-                event_key: event_key,
-                name: name,
-                captain_name: captain_name
+                name: name
             }
         })
     } 
@@ -78,22 +72,20 @@ export const addTeam = async (req: Request, res: Response) => {
     }
 }
 
-export const updateTeam = async (req: Request, res: Response) => {
+export const updateEvent = async (req: Request, res: Response) => {
     try {
-        const { team_key, event_key, name, captain_name } = req.body;
+        const { event_key, name } = req.body;
 
-        if (team_key == null || event_key == null || name == null || captain_name == null) {
+        if (event_key == null || name == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
         await db.execute(`
-            UPDATE team
+            UPDATE event
             SET 
-                event_key = ?,
-                name = ?,
-                captain_name = ?
-            WHERE team_key = ?
-        `, [event_key, name, captain_name, team_key]);
+                name = ?
+            WHERE event_key = ?
+        `, [name, event_key]);
 
         res.status(200).json({
             success: true,
@@ -111,19 +103,19 @@ export const updateTeam = async (req: Request, res: Response) => {
     }
 }
 
-export const deleteTeam = async (req: Request, res: Response) => {
+export const deleteEvent = async (req: Request, res: Response) => {
     try {
-        const { team_key } = req.body;
+        const { event_key } = req.body;
 
-        if (team_key == null) {
+        if (event_key == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
-        await db.execute(`DELETE FROM team WHERE team_key = ?`, [team_key]);
+        await db.execute(`DELETE FROM event WHERE event_key = ?`, [event_key]);
 
         res.status(200).json({
             success: true,
-            message: `Successfully deleted team ${team_key}`,
+            message: `Successfully deleted event ${event_key}`,
             data: null
         })
     } 

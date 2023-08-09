@@ -1,17 +1,18 @@
-CREATE TABLE tournament (
-    tournament_key          int             NOT NULL AUTO_INCREMENT,
+CREATE TABLE event (
+    event_key               int             NOT NULL AUTO_INCREMENT,
     name                    varchar(128)    NOT NULL,
-    description             varchar(1024)   NULL,
 
-    PRIMARY KEY (tournament_key)
+    PRIMARY KEY (event_key)
 );
 
 CREATE TABLE team (
     team_key                int             NOT NULL AUTO_INCREMENT,
+    event_key               int             NOT NULL,
     name                    varchar(64)     NOT NULL,
     captain_name            varchar(128)    NOT NULL,
     
-    PRIMARY KEY (team_key)
+    PRIMARY KEY (team_key),
+    FOREIGN KEY (event_key) REFERENCES event(event_key)
 );
 
 CREATE TABLE game (
@@ -19,6 +20,16 @@ CREATE TABLE game (
     name                    varchar(128)    NOT NULL,
 
     PRIMARY KEY (game_key)
+);
+
+CREATE TABLE tournament (
+    tournament_key          int             NOT NULL AUTO_INCREMENT,
+    name                    varchar(128)    NOT NULL,
+    game_key                int             NOT NULL,
+    description             varchar(1024)   NULL,
+
+    PRIMARY KEY (tournament_key),
+    FOREIGN KEY (game_key) REFERENCES game(game_key)
 );
 
 CREATE TABLE matchup (

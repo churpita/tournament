@@ -17,9 +17,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 })
 
 const teamRoutes = require('./routes/team');
+const eventRoutes = require('./routes/event');
 
 // app.use('/static', express.static('static'));
 
 app.use(teamRoutes);
+app.use(eventRoutes);
 
 app.listen(process.env.API_PORT);
