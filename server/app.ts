@@ -18,10 +18,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 const teamRoutes = require('./routes/team');
 const eventRoutes = require('./routes/event');
+const gameRoutes = require('./routes/game');
 
 // app.use('/static', express.static('static'));
 
 app.use(teamRoutes);
 app.use(eventRoutes);
+app.use(gameRoutes);
 
 app.listen(process.env.API_PORT);
