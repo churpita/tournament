@@ -82,7 +82,7 @@ export const updateTournament = async (req: Request, res: Response) => {
     try {
         const { tournament_key, name, game_key, description } = req.body;
 
-        if (tournament_key == null || name == null || game_key == null || description == null) {
+        if (tournament_key == null || name == null || game_key == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
