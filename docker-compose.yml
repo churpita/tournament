@@ -1,6 +1,6 @@
 services:
   mysqldb:
-    image: mysql:8.0.34
+    image: mysql:8.1.0
     container_name: tournamentdatabase
     volumes:
       - ./server/sql:/docker-entrypoint-initdb.d

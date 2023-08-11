@@ -1,5 +1,5 @@
 ARG API_PORT
-FROM node:16.15.0
+FROM node:20.5.1
 WORKDIR /usr/code
 COPY package.json .
 RUN npm install
