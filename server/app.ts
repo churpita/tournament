@@ -20,6 +20,7 @@ const teamRoutes = require('./routes/team');
 const eventRoutes = require('./routes/event');
 const gameRoutes = require('./routes/game');
 const tournamentRoutes = require('./routes/tournament');
+const matchupRoutes = require('./routes/matchup');
 
 // app.use('/static', express.static('static'));
 
@@ -27,5 +28,6 @@ app.use(teamRoutes);
 app.use(eventRoutes);
 app.use(gameRoutes);
 app.use(tournamentRoutes);
+app.use(matchupRoutes);
 
 app.listen(process.env.API_PORT);
