@@ -47,7 +47,7 @@ CREATE TABLE tournament_match (
     tournament_match_key    int             NOT NULL AUTO_INCREMENT,
     tournament_key          int             NOT NULL,
     matchup_key             int             NOT NULL,
-    previous_matchup_key      int           NULL,
+    previous_matchup_key    int             NULL,
     round                   int             NULL,
     seed                    int             NULL,
     
