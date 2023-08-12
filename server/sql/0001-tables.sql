@@ -32,38 +32,27 @@ CREATE TABLE tournament (
     FOREIGN KEY (game_key) REFERENCES game(game_key)
 );
 
-CREATE TABLE matchup (
-    matchup_key             int             NOT NULL AUTO_INCREMENT,
-    winner_team_key         int             NULL,
-    
-    PRIMARY KEY (matchup_key),
-    FOREIGN KEY (winner_team_key) REFERENCES team(team_key)
-);
-
 -- Foreign key tables
 
 -- Consider this table the actual bracket nodes
 CREATE TABLE tournament_match (
     tournament_match_key    int             NOT NULL AUTO_INCREMENT,
     tournament_key          int             NOT NULL,
-    matchup_key             int             NOT NULL,
-    previous_matchup_key    int             NULL,
+    previous_match_key      int             NULL,
     round                   int             NULL,
-    seed                    int             NULL,
+    winner_team_key         int             NULL,
     
     PRIMARY KEY (tournament_match_key),
     FOREIGN KEY (tournament_key) REFERENCES tournament(tournament_key),
-    FOREIGN KEY (matchup_key) REFERENCES matchup(matchup_key),
-    FOREIGN KEY (previous_matchup_key) REFERENCES matchup(matchup_key)
+    FOREIGN KEY (previous_match_key) REFERENCES tournament_match(tournament_match_key)
 );
 
 -- Consider this table the participants of any given match
-CREATE TABLE matchup_participant (
-    matchup_participant_key int             NOT NULL AUTO_INCREMENT,
-    matchup_key             int             NOT NULL,
+CREATE TABLE tournament_match_participant (
+    tournament_match_key    int             NOT NULL,
     team_key                int             NOT NULL,
     
-    PRIMARY KEY (matchup_participant_key),
-    FOREIGN KEY (matchup_key) REFERENCES matchup(matchup_key),
+    PRIMARY KEY (tournament_match_key, team_key),
+    FOREIGN KEY (tournament_match_key) REFERENCES tournament_match(tournament_match_key),
     FOREIGN KEY (team_key) REFERENCES team(team_key)
 );

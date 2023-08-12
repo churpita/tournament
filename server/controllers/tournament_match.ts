@@ -3,14 +3,17 @@ import { Request, Response } from 'express';
 import { db } from '../util/database';
 import { SqlUtils } from '../util/sqlutils';
 
-export const getMatchup = async (req: Request, res: Response) => {
+export const getTournamentMatch = async (req: Request, res: Response) => {
     try {
         let parameters = [
-            {column_name: 'matchup_key', value: req.body.matchup_key},
+            {column_name: 'tournament_match_key', value: req.body.tournament_match_key},
+            {column_name: 'tournament_key', value: req.body.tournament_key},
+            {column_name: 'previous_match_key', value: req.body.previous_match_key},
+            {column_name: 'round', value: req.body.round},
             {column_name: 'winner_team_key', value: req.body.winner_team_key}
         ];
 
-        let query = `SELECT * FROM matchup WHERE 1=1 `;
+        let query = `SELECT * FROM tournament_match WHERE 1=1 `;
         query = SqlUtils.AddWhereClauses(query, parameters);
 
         let results = await db.execute(query, parameters.filter(p => p.value != undefined).map(p => {return p.value;}));
@@ -34,25 +37,38 @@ export const getMatchup = async (req: Request, res: Response) => {
     }
 }
 
-export const addMatchup = async (req: Request, res: Response) => {
+export const addTournamentMatch = async (req: Request, res: Response) => {
     try {
-        const { winner_team_key } = req.body;
+        const { tournament_key, previous_match_key, round, winner_team_key } = req.body;
+
+        if (tournament_key == null) {
+            throw new ReferenceError('A required request parameter is missing.');
+        }
 
         await db.execute(`
-            INSERT INTO matchup
-            (
+            INSERT INTO tournament_match
+            (    
+                tournament_key,
+                previous_match_key,
+                round,
                 winner_team_key
             )
             VALUES
             (
+                ?,
+                ?,
+                ?,
                 ?
             )
-        `, [winner_team_key]);
+        `, [tournament_key, previous_match_key, round, winner_team_key]);
 
         res.status(200).json({
             success: true,
-            message: `Successfully added new matchup`,
+            message: `Successfully added tournament match`,
             data: {
+                tournament_key: tournament_key,
+                previous_match_key: previous_match_key,
+                round: round,
                 winner_team_key: winner_team_key
             }
         })
@@ -67,24 +83,27 @@ export const addMatchup = async (req: Request, res: Response) => {
     }
 }
 
-export const updateMatchup = async (req: Request, res: Response) => {
+export const updateTournamentMatch = async (req: Request, res: Response) => {
     try {
-        const { matchup_key, winner_team_key } = req.body;
+        const { tournament_match_key, tournament_key, previous_match_key, round, winner_team_key } = req.body;
 
-        if (matchup_key == null) {
+        if (tournament_match_key == null || tournament_key == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
         await db.execute(`
-            UPDATE matchup
+            UPDATE tournament_match
             SET 
+                tournament_key = ?,
+                previous_match_key = ?,
+                round = ?,
                 winner_team_key = ?
-            WHERE matchup_key = ?
-        `, [winner_team_key, matchup_key]);
+            WHERE tournament_match_key = ?
+        `, [tournament_key, previous_match_key, round, winner_team_key, tournament_match_key]);
 
         res.status(200).json({
             success: true,
-            message: `Successfully updated matchup ${matchup_key}`,
+            message: `Successfully updated tournament match ${tournament_match_key}`,
             data: null
         })
     } 
@@ -98,19 +117,19 @@ export const updateMatchup = async (req: Request, res: Response) => {
     }
 }
 
-export const deleteMatchup = async (req: Request, res: Response) => {
+export const deleteTournamentMatch = async (req: Request, res: Response) => {
     try {
-        const { matchup_key } = req.body;
+        const { tournament_match_key } = req.body;
 
-        if (matchup_key == null) {
+        if (tournament_match_key == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
-        await db.execute(`DELETE FROM matchup WHERE matchup_key = ?`, [matchup_key]);
+        await db.execute(`DELETE FROM tournament_match WHERE tournament_match_key = ?`, [tournament_match_key]);
 
         res.status(200).json({
             success: true,
-            message: `Successfully deleted matchup ${matchup_key}`,
+            message: `Successfully deleted tournament match ${tournament_match_key}`,
             data: null
         })
     } 
