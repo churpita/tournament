@@ -38,13 +38,13 @@ CREATE TABLE tournament (
 CREATE TABLE tournament_match (
     tournament_match_key    int             NOT NULL AUTO_INCREMENT,
     tournament_key          int             NOT NULL,
-    previous_match_key      int             NULL,
+    next_match_key          int             NULL,
     round                   int             NULL,
     winner_team_key         int             NULL,
     
     PRIMARY KEY (tournament_match_key),
     FOREIGN KEY (tournament_key) REFERENCES tournament(tournament_key),
-    FOREIGN KEY (previous_match_key) REFERENCES tournament_match(tournament_match_key)
+    FOREIGN KEY (next_match_key) REFERENCES tournament_match(tournament_match_key)
 );
 
 -- Consider this table the participants of any given match
