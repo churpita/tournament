@@ -7,6 +7,7 @@ export const getTournament = async (req: Request, res: Response) => {
     try {
         let parameters = [
             {column_name: 'tournament_key', value: req.body.tournament_key},
+            {column_name: 'event_key', value: req.body.event_key},
             {column_name: 'name', value: req.body.name},
             {column_name: 'game_key', value: req.body.game_key},
             {column_name: 'description', value: req.body.description}
@@ -38,15 +39,16 @@ export const getTournament = async (req: Request, res: Response) => {
 
 export const addTournament = async (req: Request, res: Response) => {
     try {
-        const { name, game_key, description } = req.body;
+        const { event_key, name, game_key, description } = req.body;
 
-        if (name == null || game_key == null) {
+        if (event_key == null || name == null || game_key == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
         await db.execute(`
             INSERT INTO tournament
-            (    
+            (
+                event_key,
                 name,
                 game_key,
                 description
@@ -55,14 +57,16 @@ export const addTournament = async (req: Request, res: Response) => {
             (
                 ?,
                 ?,
+                ?,
                 ?
             )
-        `, [name, game_key, description]);
+        `, [event_key, name, game_key, description]);
 
         res.status(200).json({
             success: true,
             message: `Successfully added tournament ${name}`,
             data: {
+                event_key: event_key,
                 name: name,
                 game_key: game_key,
                 description: description
@@ -81,20 +85,21 @@ export const addTournament = async (req: Request, res: Response) => {
 
 export const updateTournament = async (req: Request, res: Response) => {
     try {
-        const { tournament_key, name, game_key, description } = req.body;
+        const { tournament_key, event_key, name, game_key, description } = req.body;
 
-        if (tournament_key == null || name == null || game_key == null) {
+        if (tournament_key == null || event_key == null || name == null || game_key == null) {
             throw new ReferenceError('A required request parameter is missing.');
         }
 
         await db.execute(`
             UPDATE tournament
             SET 
+                event_key = ?,
                 name = ?,
                 game_key = ?,
                 description = ?
             WHERE tournament_key = ?
-        `, [name, game_key, description, tournament_key]);
+        `, [event_key, name, game_key, description, tournament_key]);
 
         res.status(200).json({
             success: true,

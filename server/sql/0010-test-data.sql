@@ -10,8 +10,8 @@ INSERT INTO team (event_key, name, captain_name) VALUES (1, 'Team Delta', 'Delta
 INSERT INTO game (name) VALUES ('Test Video Game 1');
 INSERT INTO game (name) VALUES ('Test Video Game 2');
 
-INSERT INTO tournament(name, game_key, description) VALUES ('VG1 Tournament', 1, 'Single Elimination Test');
-INSERT INTO tournament(name, game_key, description) VALUES ('VG2 Tournament', 2, 'Double Elimination Test');
+INSERT INTO tournament(event_key, name, game_key, description) VALUES (1, 'VG1 Tournament', 1, 'Single Elimination Test');
+INSERT INTO tournament(event_key, name, game_key, description) VALUES (1, 'VG2 Tournament', 2, 'Double Elimination Test');
 
 -- Round 1 (Semi Finals)
 INSERT INTO tournament_match(tournament_key, round, winner_team_key) VALUES (1, 1, 2); -- 1: Bravo wins against Alpha

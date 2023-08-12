@@ -24,11 +24,13 @@ CREATE TABLE game (
 
 CREATE TABLE tournament (
     tournament_key          int             NOT NULL AUTO_INCREMENT,
+    event_key               int             NOT NULL,
     name                    varchar(128)    NOT NULL,
     game_key                int             NOT NULL,
     description             varchar(1024)   NULL,
 
     PRIMARY KEY (tournament_key),
+    FOREIGN KEY (event_key) REFERENCES event(event_key),
     FOREIGN KEY (game_key) REFERENCES game(game_key)
 );
 
