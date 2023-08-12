@@ -1,21 +1,22 @@
 import { Request, Response } from 'express';
 
 import { db } from '../util/database';
+import { SqlUtils } from '../util/sqlutils';
 
 export const getTournament = async (req: Request, res: Response) => {
     try {
-        const { tournament_key } = req.body;
+        let parameters = [
+            {column_name: 'tournament_key', value: req.body.tournament_key},
+            {column_name: 'name', value: req.body.name},
+            {column_name: 'game_key', value: req.body.game_key},
+            {column_name: 'description', value: req.body.description}
+        ];
 
-        let results;
+        let query = `SELECT * FROM tournament WHERE 1=1 `;
+        query = SqlUtils.AddWhereClauses(query, parameters);
 
-        if (tournament_key != null) {
-            results = await db.execute(`SELECT * FROM tournament WHERE tournament_key = ?`, [tournament_key]);
-            results = results[0];
-        }
-        else {
-            results = await db.execute(`SELECT * FROM tournament`);
-            results = results[0];
-        }
+        let results = await db.execute(query, parameters.filter(p => p.value != undefined).map(p => {return p.value;}));
+        results = results[0];
 
         res.status(200).json({
             success: true,

@@ -1,21 +1,20 @@
 import { Request, Response } from 'express';
 
 import { db } from '../util/database';
+import { SqlUtils } from '../util/sqlutils';
 
 export const getGame = async (req: Request, res: Response) => {
     try {
-        const { game_key } = req.body;
+        let parameters = [
+            {column_name: 'game_key', value: req.body.game_key},
+            {column_name: 'name', value: req.body.name}
+        ];
 
-        let results;
+        let query = `SELECT * FROM game WHERE 1=1 `;
+        query = SqlUtils.AddWhereClauses(query, parameters);
 
-        if (game_key != null) {
-            results = await db.execute(`SELECT * FROM game WHERE game_key = ?`, [game_key]);
-            results = results[0];
-        }
-        else {
-            results = await db.execute(`SELECT * FROM game`);
-            results = results[0];
-        }
+        let results = await db.execute(query, parameters.filter(p => p.value != undefined).map(p => {return p.value;}));
+        results = results[0];
 
         res.status(200).json({
             success: true,

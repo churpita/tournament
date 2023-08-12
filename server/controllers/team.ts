@@ -1,21 +1,22 @@
 import { Request, Response } from 'express';
 
 import { db } from '../util/database';
+import { SqlUtils } from '../util/sqlutils';
 
 export const getTeam = async (req: Request, res: Response) => {
     try {
-        const { team_key } = req.body;
+        let parameters = [
+            {column_name: 'team_key', value: req.body.team_key},
+            {column_name: 'event_key', value: req.body.event_key},
+            {column_name: 'name', value: req.body.name},
+            {column_name: 'captain_name', value: req.body.captain_name}
+        ];
 
-        let results;
+        let query = `SELECT * FROM team WHERE 1=1 `;
+        query = SqlUtils.AddWhereClauses(query, parameters);
 
-        if (team_key != null) {
-            results = await db.execute(`SELECT * FROM team WHERE team_key = ?`, [team_key]);
-            results = results[0];
-        }
-        else {
-            results = await db.execute(`SELECT * FROM team`);
-            results = results[0];
-        }
+        let results = await db.execute(query, parameters.filter(p => p.value != undefined).map(p => {return p.value;}));
+        results = results[0];
 
         res.status(200).json({
             success: true,
