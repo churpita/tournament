@@ -1,0 +1,10 @@
+.icon {
+    user-select: none;
+    height: 2rem;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: gray;
+    transition: ease-in-out .125s;
+}
