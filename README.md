@@ -13,7 +13,11 @@ To run this application on your local machine,
 
 # Tech Stack
 - Node.js
-- React.js
-- TypeScript
+  - Written using TypeScript
+  - Client Specific
+    - React.js
+    - Webpack
+  - Server Specific
+    - Express
 - MySQL
 - Docker
