@@ -10,7 +10,7 @@ type Props = {
 
 export const IconButton = (props: Props): React.ReactNode => {
     return (
-        <div className={styles.icon} style={props.style}>
+        <div className={styles.icon} {...props}>
             {props.children}
         </div>
     );
