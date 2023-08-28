@@ -14,7 +14,7 @@ export const Header = (props: Props) => {
     return (
         <header className={styles.header}>
             <span>Tournament</span>
-            <IconButton>
+            <IconButton style={{ height: "2rem" }}>
                 <MdDarkMode onClick={props.toggleTheme} size={"2em"} />
             </IconButton>
         </header>

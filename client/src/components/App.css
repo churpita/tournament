@@ -1,5 +1,7 @@
 .app-container {
     min-height: 100vh;
+    display: flex;
+    flex-flow: column;
     overflow: auto;
     background: var(--theme-page-background);
     color: var(--theme-font-color);
@@ -23,9 +25,7 @@
 
 .body {
     max-width: 1280px;
-    margin: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    flex: 1 1 auto;
 }

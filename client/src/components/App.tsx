@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 
 import "./App.css";
+import Sidebar from "./Sidebar";
 
 export const App = (): React.ReactNode => {
     if (!localStorage.getItem("theme"))
@@ -25,7 +26,8 @@ export const App = (): React.ReactNode => {
         <div className={`app-container ${theme}`}>
             <Header toggleTheme={themeToggler} />
             <div className="body">
-                Hello world!
+                <Sidebar />
+                <div>Hello world!</div>
             </div>
         </div>
     );
