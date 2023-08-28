@@ -33,13 +33,13 @@ const ListItems = [
 
 export const Sidebar = (): React.ReactNode => {
     return (
-        <div className={styles.sidebarContainer}>
+        <nav className={styles.sidebarContainer}>
             <ul>
                 {ListItems.map((item) => {
                     return <SidebarItem key={item.id} item={item} />;
                 })}
             </ul>
-        </div>
+        </nav>
     );
 };
 
