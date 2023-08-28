@@ -8,7 +8,7 @@ type Props = {
     onClick?: React.MouseEventHandler;
 };
 
-export const IconButton = (props: Props) => {
+export const IconButton = (props: Props): React.ReactNode => {
     return (
         <div className={styles.icon} style={props.style}>
             {props.children}

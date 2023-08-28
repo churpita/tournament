@@ -10,7 +10,7 @@ type Props = {
     toggleTheme: React.MouseEventHandler;
 };
 
-export const Header = (props: Props) => {
+export const Header = (props: Props): React.ReactNode => {
     return (
         <header className={styles.header}>
             <span>Tournament</span>
