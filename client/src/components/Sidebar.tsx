@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styles from "./Sidebar.module.css";
 import SidebarItem from "./SidebarItem";
+import IconButton from "./IconButton";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const ListItems = [
     {
@@ -32,13 +34,29 @@ const ListItems = [
 ];
 
 export const Sidebar = (): React.ReactNode => {
+    const [collapsed, setCollapsed] = useState(false);
+
     return (
         <nav className={styles.sidebarContainer}>
-            <ul>
+            <ul
+                className={`${styles.sidebarList} ${
+                    collapsed && styles.sidebarCollapsed
+                } `}
+            >
                 {ListItems.map((item) => {
                     return <SidebarItem key={item.id} item={item} />;
                 })}
             </ul>
+            <div
+                className={styles.sidebarExpandBar}
+                onClick={(e) => setCollapsed((e) => !e)}
+            >
+                {collapsed ? (
+                    <MdChevronRight size={"1rem"} />
+                ) : (
+                    <MdChevronLeft size={"1rem"} />
+                )}
+            </div>
         </nav>
     );
 };

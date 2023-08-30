@@ -1,5 +1,25 @@
 .sidebarContainer {
     background: var(--theme-page-background);
-    border-top: 1px solid var(--theme-page-shadow);
-    border-right: 1px solid var(--theme-page-shadow);
+    border-right: 1px solid var(--theme-page-border);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sidebarList {
+    height: 100%;
+    width: 200px;
+    transition: margin-left 0.25s;
+}
+
+.sidebarExpandBar {
+    background: var(--theme-page-border);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebarCollapsed {
+    margin-left: -200px;
 }
