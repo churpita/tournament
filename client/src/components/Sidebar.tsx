@@ -2,34 +2,36 @@ import React, { useState } from "react";
 
 import styles from "./Sidebar.module.css";
 import SidebarItem from "./SidebarItem";
-import IconButton from "./IconButton";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const ListItems = [
     {
-        id: 1,
         label: "Item 1",
-        hasChildren: false,
     },
     {
-        id: 2,
         label: "Item 2",
-        hasChildren: false,
     },
     {
-        id: 3,
         label: "Item 3",
-        hasChildren: false,
+        children: [
+            { label: "Item 3.1" },
+            {
+                label: "Item 3.2",
+                children: [
+                    { label: "Item 3.2.1" },
+                    { label: "Item 3.2.2" },
+                    { label: "Item 3.2.3" },
+                ],
+            },
+            { label: "Item 3.3" },
+        ],
     },
     {
-        id: 4,
         label: "Item 4",
-        hasChildren: true,
+        children: [{ label: "Item 4.1" }, { label: "Item 4.2" }],
     },
     {
-        id: 5,
         label: "Item 5",
-        hasChildren: false,
     },
 ];
 
@@ -43,8 +45,13 @@ export const Sidebar = (): React.ReactNode => {
                     collapsed && styles.sidebarCollapsed
                 } `}
             >
-                {ListItems.map((item) => {
-                    return <SidebarItem key={item.id} item={item} />;
+                {ListItems.map((item, index) => {
+                    return (
+                        <SidebarItem
+                            key={`${item.label}-${index}`}
+                            item={item}
+                        />
+                    );
                 })}
             </ul>
             <div
