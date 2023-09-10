@@ -8,18 +8,24 @@
 
 .sidebarList {
     height: 100%;
-    width: 200px;
+    width: 300px;
     transition: margin-left 0.25s;
+    overflow-x: auto;
+    resize: horizontal;
 }
 
 .sidebarExpandBar {
-    background: var(--theme-page-border);
     height: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;
+    transition: background-color 0.125s;
+}
+
+.sidebarExpandBar:hover {
+    background: var(--theme-page-border);
 }
 
 .sidebarCollapsed {
-    margin-left: -200px;
+    margin-left: -300px;
 }

@@ -12,15 +12,15 @@ type SidebarItemProps = {
 export const SidebarItem = (props: SidebarItemProps): React.ReactNode => {
     // Child Node
     if (!props.item.children) {
-        return <div className={styles.sidebarItemChild}>{props.item.label}</div>;
+        return <div className={styles.sidebarItem}>{props.item.label}</div>;
     }
     // Parent Node Container (contains additional Parent Nodes/Child Nodes)
     else {
         const [isOpen, setIsOpen] = useState(false);
         return (
-            <div className={styles.sidebarItem}>
+            <div>
                 {/* Expandable parent node */}
-                <div className={styles.sidebarItemParent} onClick={(e) => setIsOpen((o) => !o)}>
+                <div className={styles.sidebarItem} onClick={(e) => setIsOpen((o) => !o)}>
                     <IconButton style={{ height: "1rem", paddingRight: "0.5rem" }}>
                         {isOpen ? <MdRemove /> : <MdAdd />}
                     </IconButton>
