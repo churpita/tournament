@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styles from "./SidebarItem.module.css";
 
-import { MdAdd, MdRemove } from "react-icons/md";
+import { MdAddCircleOutline, MdRemoveCircleOutline } from "react-icons/md";
 import IconButton from "./IconButton";
 
 type SidebarItemProps = {
@@ -22,17 +22,21 @@ export const SidebarItem = (props: SidebarItemProps): React.ReactNode => {
                 {/* Expandable parent node */}
                 <div className={styles.sidebarItem} onClick={(e) => setIsOpen((o) => !o)}>
                     <IconButton style={{ height: "1rem", paddingRight: "0.5rem" }}>
-                        {isOpen ? <MdRemove /> : <MdAdd />}
+                        {isOpen ? <MdRemoveCircleOutline /> : <MdAddCircleOutline />}
                     </IconButton>
                     {props.item.label}
                 </div>
                 {/* Recursive child nodes */}
                 <div
-                    className={`${styles.sidebarItemChildren} ${isOpen ? styles.setAsVisible : ``}`}
+                    className={`${styles.sidebarItemChildren} ${
+                        isOpen ? styles.setAsVisible : ``
+                    }`}
                 >
                     <div>
                         {props.item.children.map((item, index) => {
-                            return <SidebarItem key={`${item.label}-${index}`} item={item} />;
+                            return (
+                                <SidebarItem key={`${item.label}-${index}`} item={item} />
+                            );
                         })}
                     </div>
                 </div>
