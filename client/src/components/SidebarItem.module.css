@@ -1,12 +1,18 @@
-.sidebarItem {
+.sidebarItemParent,
+.sidebarItemChild {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.5rem;
-    cursor: pointer;
     transition: background-color 0.125s;
+    cursor: pointer;
+    user-select: none;
 }
 
-.sidebarItem:hover {
+.sidebarItemParent:hover,
+.sidebarItemChild:hover {
     background-color: var(--theme-page-border);
+}
+
+.sidebarItemChildren {
+    padding-left: 1.5rem;
 }

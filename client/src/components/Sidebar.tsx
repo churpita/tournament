@@ -40,11 +40,13 @@ export const Sidebar = (): React.ReactNode => {
 
     return (
         <nav className={styles.sidebarContainer}>
+            {/* Sidebar items */}
             <ul className={`${styles.sidebarList} ${collapsed && styles.sidebarCollapsed} `}>
                 {ListItems.map((item, index) => {
                     return <SidebarItem key={`${item.label}-${index}`} item={item} />;
                 })}
             </ul>
+            {/* Right side expand/collapse bar */}
             <div className={styles.sidebarExpandBar} onClick={(e) => setCollapsed((e) => !e)}>
                 {collapsed ? <MdChevronRight size={"1rem"} /> : <MdChevronLeft size={"1rem"} />}
             </div>
