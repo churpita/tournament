@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import styles from "./Sidebar.module.css";
 import SidebarItem from "./SidebarItem";
-import { MdChevronLeft, MdChevronRight, MdHome, MdSettings } from "react-icons/md";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import SidebarToolbar from "./SidebarToolbar";
 
 const ListItems = [
     {
@@ -57,9 +58,10 @@ export const Sidebar = (): React.ReactNode => {
             {/* Sidebar items */}
             <ul
                 className={`${styles.sidebarList} ${
-                    collapsed && styles.sidebarCollapsed
+                    collapsed ? styles.sidebarCollapsed : ``
                 } `}
             >
+                <SidebarToolbar />
                 {ListItems.map((item, index) => {
                     return <SidebarItem key={`${item.label}-${index}`} item={item} />;
                 })}

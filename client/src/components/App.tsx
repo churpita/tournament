@@ -12,7 +12,8 @@ export const App = (): React.ReactNode => {
 
     const themeToggler = () => {
         setTheme((curr) => {
-            const newTheme = curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark";
+            const newTheme =
+                curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark";
             localStorage.setItem("theme", newTheme);
             return newTheme;
         });

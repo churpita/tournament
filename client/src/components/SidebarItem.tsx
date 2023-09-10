@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styles from "./SidebarItem.module.css";
 
-import { MdAddCircleOutline, MdRemoveCircleOutline } from "react-icons/md";
+import { MdAddCircle, MdRemoveCircleOutline } from "react-icons/md";
 import IconButton from "./IconButton";
 
 type SidebarItemProps = {
@@ -22,7 +22,7 @@ export const SidebarItem = (props: SidebarItemProps): React.ReactNode => {
                 {/* Expandable parent node */}
                 <div className={styles.sidebarItem} onClick={(e) => setIsOpen((o) => !o)}>
                     <IconButton style={{ height: "1rem", paddingRight: "0.5rem" }}>
-                        {isOpen ? <MdRemoveCircleOutline /> : <MdAddCircleOutline />}
+                        {isOpen ? <MdRemoveCircleOutline /> : <MdAddCircle />}
                     </IconButton>
                     {props.item.label}
                 </div>

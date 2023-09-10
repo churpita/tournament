@@ -1,0 +1,8 @@
+.toolbar {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    border-bottom: 1px solid var(--theme-page-border);
+}
