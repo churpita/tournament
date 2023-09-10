@@ -16,4 +16,15 @@
 .sidebarItemChildren {
     margin-left: 2rem;
     border-left: 1px solid var(--theme-page-border);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s;
+}
+
+.sidebarItemChildren>div {
+    overflow: hidden;
+}
+
+.setAsVisible {
+    grid-template-rows: 1fr;
 }

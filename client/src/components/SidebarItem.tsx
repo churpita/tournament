@@ -27,13 +27,15 @@ export const SidebarItem = (props: SidebarItemProps): React.ReactNode => {
                     {props.item.label}
                 </div>
                 {/* Recursive child nodes */}
-                {isOpen && (
-                    <div className={styles.sidebarItemChildren}>
+                <div
+                    className={`${styles.sidebarItemChildren} ${isOpen ? styles.setAsVisible : ``}`}
+                >
+                    <div>
                         {props.item.children.map((item, index) => {
                             return <SidebarItem key={`${item.label}-${index}`} item={item} />;
                         })}
                     </div>
-                )}
+                </div>
             </div>
         );
     }
