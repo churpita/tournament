@@ -1,9 +1,30 @@
 .icon {
     user-select: none;
+    position: relative;
 }
 
-.icon:hover {
+.icon svg:hover {
     cursor: pointer;
     color: gray;
     transition: ease-in-out .125s;
+}
+
+.tooltipParent {
+    position: absolute;
+}
+
+.tooltipText {
+    position: fixed;
+    background: var(--theme-tooltip-background);
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.icon:hover .tooltipText {
+    opacity: 1;
+    visibility: visible;
 }
