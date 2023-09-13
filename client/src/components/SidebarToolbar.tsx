@@ -7,7 +7,13 @@ import IconButton from "./IconButton";
 export const SidebarToolbar = (): React.ReactNode => {
     return (
         <div className={styles.toolbar}>
-            <IconButton style={{ height: "1rem" }}>
+            <IconButton
+                style={{ height: "1rem" }}
+                tooltip={{
+                    text: "Expand All",
+                    offset: { bottom: "3rem" },
+                }}
+            >
                 <MdAddCircle />
             </IconButton>
         </div>
