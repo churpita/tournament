@@ -1,9 +1,13 @@
 .app-container {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow: hidden;
     display: grid;
     grid-template-rows: 4rem 1fr;
-    overflow: hidden;
+    grid-template-columns: min-content 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar content";
     background: var(--theme-page-background);
     color: var(--theme-font-color);
 }
@@ -26,8 +30,6 @@
     --theme-font-color: black;
 }
 
-.body {
-    max-width: 1280px;
-    display: flex;
-    flex-direction: row;
+.content {
+    grid-area: content;
 }

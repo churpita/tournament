@@ -1,8 +1,9 @@
 .sidebarContainer {
+    grid-area: sidebar;
+    height: calc(100vh - 4rem);
     background: var(--theme-page-background);
     display: flex;
     flex-direction: row;
-    align-items: center;
     transition: margin-left 0.25s;
 }
 

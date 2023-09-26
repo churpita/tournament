@@ -22,10 +22,8 @@ export const App = (): React.ReactNode => {
     return (
         <div className={`app-container ${theme}`}>
             <Header toggleTheme={themeToggler} />
-            <div className="body">
-                <Sidebar />
-                <div>Hello world!</div>
-            </div>
+            <Sidebar />
+            <div className="content">Hello world!</div>
         </div>
     );
 };

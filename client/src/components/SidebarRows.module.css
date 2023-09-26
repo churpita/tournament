@@ -1,5 +1,5 @@
 .sidebarList {
-    height: 100%;
+    height: calc(100% - 2rem);
     width: 300px;
     overflow-x: auto;
 }
