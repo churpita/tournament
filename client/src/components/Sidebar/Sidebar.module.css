@@ -1,6 +1,5 @@
 .sidebarContainer {
     grid-area: sidebar;
-    height: calc(100vh - 4rem);
     background: var(--theme-page-background);
     display: flex;
     flex-direction: row;
@@ -19,8 +18,4 @@
 
 .sidebarExpandBar:hover {
     background: var(--theme-page-border);
-}
-
-.sidebarCollapsed {
-    margin-left: -300px;
 }

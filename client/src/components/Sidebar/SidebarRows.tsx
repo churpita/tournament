@@ -4,13 +4,14 @@ import SidebarItem from "./SidebarItem";
 
 type SidebarRowsProps = {
     data: { label: string; children?: { label: string }[] }[];
+    width: string;
     expandAllListener: boolean;
     collapseAllListener: boolean;
 };
 
 export const SidebarRows = (props: SidebarRowsProps) => {
     return (
-        <ul className={styles.sidebarList}>
+        <ul className={styles.sidebarList} style={{ width: props.width }}>
             {props.data.map((item, index) => {
                 return (
                     <SidebarItem

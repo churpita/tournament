@@ -6,6 +6,11 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import SidebarToolbar from "./SidebarToolbar";
 import SidebarRows from "./SidebarRows";
 
+type SidebarProps = {
+    width: string;
+    height: string;
+};
+
 const ListItems = [
     {
         label: "Item 1",
@@ -82,7 +87,7 @@ const ListItems = [
     },
 ];
 
-export const Sidebar = (): React.ReactNode => {
+export const Sidebar = (props: SidebarProps): React.ReactNode => {
     const [collapsed, setCollapsed] = useState(false);
 
     const [expandAll, setExpandAll] = useState(false);
@@ -90,9 +95,11 @@ export const Sidebar = (): React.ReactNode => {
 
     return (
         <nav
-            className={`${styles.sidebarContainer} ${
-                collapsed ? styles.sidebarCollapsed : ``
-            }`}
+            className={styles.sidebarContainer}
+            style={{
+                height: props.height,
+                marginLeft: collapsed ? `calc(-1 * ${props.width})` : 0,
+            }}
         >
             <div>
                 <SidebarToolbar
@@ -102,6 +109,7 @@ export const Sidebar = (): React.ReactNode => {
                 {/* Sidebar items */}
                 <SidebarRows
                     data={ListItems}
+                    width={props.width}
                     expandAllListener={expandAll}
                     collapseAllListener={collapseAll}
                 />

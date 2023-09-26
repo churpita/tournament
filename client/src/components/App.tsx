@@ -22,7 +22,7 @@ export const App = (): React.ReactNode => {
     return (
         <div className={`app-container ${theme}`}>
             <Header toggleTheme={themeToggler} />
-            <Sidebar />
+            <Sidebar height="calc(100vh - 4rem)" width="300px" />
             <div className="content">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et
