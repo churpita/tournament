@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 
 import "./App.css";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar/Sidebar";
 
 export const App = (): React.ReactNode => {
     if (!localStorage.getItem("theme")) localStorage.setItem("theme", "app-theme-dark");

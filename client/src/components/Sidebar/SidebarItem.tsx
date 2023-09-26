@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./SidebarItem.module.css";
 
 import { MdAddCircle, MdRemoveCircleOutline } from "react-icons/md";
-import IconButton from "./IconButton";
+import IconButton from "../IconButton";
 
 type SidebarItemProps = {
     item: { label: string; children?: { label: string }[] };

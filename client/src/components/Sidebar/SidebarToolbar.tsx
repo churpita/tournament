@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./SidebarToolbar.module.css";
 import { MdAddCircle, MdRemoveCircleOutline } from "react-icons/md";
-import IconButton from "./IconButton";
+import IconButton from "../IconButton";
 
 type SidebarToolbarProps = {
     expandAllTrigger: React.Dispatch<React.SetStateAction<boolean>>;
