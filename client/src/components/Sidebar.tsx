@@ -25,7 +25,7 @@ const ListItems = [
                         children: [
                             { label: "Item 3.2.1.1" },
                             {
-                                label: "Item 3.2.1.2",
+                                label: "Item 3.2.1.2 but with a lot more characters to cause overflow",
                                 children: [
                                     { label: "Item 3.2.1.2.1" },
                                     { label: "Item 3.2.1.2.2" },
@@ -85,6 +85,9 @@ const ListItems = [
 export const Sidebar = (): React.ReactNode => {
     const [collapsed, setCollapsed] = useState(false);
 
+    const [expandAll, setExpandAll] = useState(false);
+    const [collapseAll, setCollapseAll] = useState(false);
+
     return (
         <nav
             className={`${styles.sidebarContainer} ${
@@ -92,9 +95,16 @@ export const Sidebar = (): React.ReactNode => {
             }`}
         >
             <div>
-                <SidebarToolbar />
+                <SidebarToolbar
+                    expandAllTrigger={setExpandAll}
+                    collapseAllTrigger={setCollapseAll}
+                />
                 {/* Sidebar items */}
-                <SidebarRows data={ListItems} />
+                <SidebarRows
+                    data={ListItems}
+                    expandAllListener={expandAll}
+                    collapseAllListener={collapseAll}
+                />
             </div>
             {/* Right side expand/collapse bar */}
             <div
