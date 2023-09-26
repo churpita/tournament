@@ -32,4 +32,7 @@
 
 .content {
     grid-area: content;
+    padding: 1rem;
+    height: calc(100vh - 4rem);
+    overflow: auto;
 }
