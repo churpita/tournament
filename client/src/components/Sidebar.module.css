@@ -1,0 +1,26 @@
+.sidebarContainer {
+    grid-area: sidebar;
+    height: calc(100vh - 4rem);
+    background: var(--theme-page-background);
+    display: flex;
+    flex-direction: row;
+    transition: margin-left 0.25s;
+}
+
+.sidebarExpandBar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.125s;
+    border-left: 1px solid var(--theme-page-border);
+    border-right: 1px solid var(--theme-page-border);
+}
+
+.sidebarExpandBar:hover {
+    background: var(--theme-page-border);
+}
+
+.sidebarCollapsed {
+    margin-left: -300px;
+}

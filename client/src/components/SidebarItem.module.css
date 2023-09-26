@@ -1,0 +1,30 @@
+.sidebarItem {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-wrap: anywhere;
+    transition: background-color 0.125s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sidebarItem:hover {
+    background-color: var(--theme-page-border);
+}
+
+.sidebarItemChildren {
+    margin-left: 2rem;
+    border-left: 1px solid var(--theme-page-border);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.125s;
+}
+
+.sidebarItemChildren>div {
+    overflow: hidden;
+}
+
+.setAsVisible {
+    grid-template-rows: 1fr;
+}
